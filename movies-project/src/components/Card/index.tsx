@@ -1,13 +1,22 @@
 import { CardContainer } from "./styles";
+import { AiFillStar } from "react-icons/ai";
 
-function Card() {
+interface CardProps {
+   title: string;
+   popularity: number;
+   path: string;
+}
+
+function Card({ title, popularity, path }: CardProps) {
+   const imagePath = "https://image.tmdb.org/t/p/w500";
    return (
       <CardContainer>
-         <img src="https://picsum.photos/400/400" />
+         <img src={`${imagePath}${path}`} alt={title} />
 
-         <h1>Spider-Man: No way home</h1>
+         <h1>{title}</h1>
          <button>
-            <p>2424</p>
+            <AiFillStar />
+            <p>{Math.floor(popularity)}</p>
          </button>
       </CardContainer>
    );

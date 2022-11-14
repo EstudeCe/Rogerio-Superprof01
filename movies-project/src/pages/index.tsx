@@ -1,9 +1,27 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import Header from "../components/Header";
 import { ContainerCards } from "../components/_ui/ContainerCards";
 
+interface MoviesProps {
+   id: number;
+   title: string;
+   popularity: number;
+   poster_path: string;
+}
+
 export default function Home() {
+   const [movies, setMovies] = useState([] as MoviesProps[]);
+
+   useEffect(() => {
+      fetch(
+         "https://api.themoviedb.org/3/movie/popular?api_key=1e5cfb0096b9e7e5d36fbf7eb46f3d10&language=en-US&page=1"
+      )
+         .then((response) => response.json())
+         .then((response) => setMovies(response.results));
+   }, []);
+
    return (
       <>
          <Head>
@@ -15,9 +33,13 @@ export default function Home() {
          <Header />
 
          <ContainerCards>
-            <Card />
-            <Card />
-            <Card />
+            {movies.map((movie) => (
+               <Card
+                  title={movie.title}
+                  popularity={movie.popularity}
+                  path={movie.poster_path}
+               />
+            ))}
          </ContainerCards>
       </>
    );

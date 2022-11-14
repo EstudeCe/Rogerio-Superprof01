@@ -22,4 +22,21 @@ export const CardContainer = styled.div`
    img {
       width: 100%;
    }
+
+   button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      background: #805ad5;
+      color: #fff;
+
+      font-size: 16px;
+      font-weight: 600;
+
+      border: none;
+      border-radius: 8px;
+      padding: 4px 8px;
+   }
 `;
